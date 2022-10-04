@@ -23,13 +23,13 @@ fi
 mkdir -p ../build
 mv *.pdf ../build
 
-mkdir -p ../logs
-mv *.aux ../logs
-mv *.log ../logs
-mv *.nav ../logs
-mv *.out ../logs
-mv *.snm ../logs
-mv *.toc ../logs
-mv *.vrb ../logs
-mv *.pyg ../logs
-mv _minted-*/ ../logs
+mkdir -p ../.private/logs
+mv *.aux ../.private/logs
+mv *.log ../.private/logs
+mv *.nav ../.private/logs
+mv *.out ../.private/logs
+mv *.snm ../.private/logs
+mv *.toc ../.private/logs
+mv *.vrb ../.private/logs
+mv *.pyg ../.private/logs
+mv _minted-*/ ../.private/logs
