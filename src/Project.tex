@@ -1,0 +1,98 @@
+\input{TD_class.tex}
+\setcounter{section}{0}
+
+\begin{document}
+%----------------------------------------------------------------------------------------
+%========================================================================================
+\section{Project}
+%========================================================================================
+%----------------------------------------------------------------------------------------
+
+The goal of this project is to predict \textit{part\_assiette\_chomage\_partiel} one month ahead.
+You will be guided through the differents steps that are fundamental in a Data Science project.
+You still have an important part of autonomy in your code, methods, analysis and decisions.
+Several interpretations often coexist as long as they are coherent. Do your best, 
+be courageous and deploy your Data Science artillery!
+
+%****************************************************************************************
+\subsection{Set up}
+%****************************************************************************************
+
+\begin{enumerate}
+    \item Load data:\\
+    \textit{masse-salariale-et-assiette-chomage-partiel-mensuelles-du-secteur-prive\_modif.csv}\footnote{\href{https://www.data.gouv.fr/fr/datasets/masse-salariale-et-assiette-chomage-partiel-mensuelles-du-secteur-prive/}{Data is a modified version from this source}}
+    \item See number of samples (rows) and features (columns)
+    \item See data type
+    \item Set \textit{dernier\_jour\_du\_mois} as index
+    \item Cast index as datetime
+    \item Sort index in ascending order
+\end{enumerate}
+
+
+%****************************************************************************************
+\subsection{Data Analysis}
+%****************************************************************************************
+
+\begin{enumerate}
+    \item Produce standard descriptive statistics
+    \item Visualize data (many plots can be done in one line of code using Pandas and Seaborn)
+\end{enumerate}
+
+%****************************************************************************************
+\subsection{Data Cleaning}
+%****************************************************************************************
+
+\begin{enumerate}
+    \item Check for missing values (some are more subtle than a explicit NaN)
+    \item Impute these missing values with at least 2 methods seen in the lectures, 
+    don't delete them in this project (we need all the dates in a Times Series problem)
+    \item Check and treat outlier(s)
+\end{enumerate}
+
+%****************************************************************************************
+\subsection{Feature Engineering}
+%****************************************************************************************
+
+\begin{enumerate}
+    \item Add a feature \textit{is\_year\_end}
+    \begin{itemize}
+        \item 1 when month is november or december
+        \item 0 otherwise
+    \end{itemize}
+\end{enumerate}
+
+%****************************************************************************************
+\subsection{Prediction}
+%****************************************************************************************
+
+\begin{enumerate}
+    \item Split your data into a train set (60\% of data) and a test set (40\%)
+    \item Use a linear regression to predcit \textit{part\_assiette\_chomage\_partiel} 1 month ahead
+    \begin{itemize}
+        \item you should shift your features (in time) compared to your target
+        \item find tutorials, there are a lot of them, its the only way toward autonomous learning!
+    \end{itemize}
+    \item How good is your prediction?
+    \begin{itemize}
+        \item Plot the predicted values on the same graph than the actual values
+        \item Use metric(s) to evaluate your model on both the train and test sets
+        \item Interpret the results
+        \item Give advices to your (hypothetical) colleague to continue your work
+    \end{itemize}
+\end{enumerate}
+
+
+
+%----------------------------------------------------------------------------------------
+\subsubsection{Bonus}
+%----------------------------------------------------------------------------------------
+
+\begin{enumerate}
+    \item Make a prediction without the added variable \textit{is\_year\_end}, what is the impact?
+    \item Use a Ridge regression in place of the Linear regression (you might become happy about the results!)
+    \item Use a \textbf{polynomial} regression to predcit 1 month ahead (find tutorials, there are a lot of them, and its the only way to learn autonomously!)
+    \item Predict 2 months ahead, then 3 and 4 months ahead. If your code is written correctly, it should only require to manually change the value of a constant.
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,83 @@
+\usepackage{ae,lmodern}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+
+\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
+\usepackage{xcolor,colortbl}
+\definecolor{DarkGrey}{HTML}{222222}
+\definecolor{DarkBlue}{HTML}{004BA9}
+\definecolor{DarkRed}{HTML}{CC1111}
+\definecolor{DarkGreen}{HTML}{117711}
+\definecolor{DarkOrange}{HTML}{CC7000}
+\definecolor{LightGrey}{HTML}{DDDDDD}
+\definecolor{LightBlue}{HTML}{F0F8FF}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\usepackage[cache=false]{minted}
+\setminted[bash]{
+   bgcolor=LightBlue,
+   breaklines, breakanywhere,
+   frame=single,
+   autogobble
+}
+\usemintedstyle[python]{native}
+\setminted[python]{
+   bgcolor=black,
+   breaklines, breakanywhere,
+   autogobble
+}
+
+\usepackage{listings}
+\usepackage{lstautogobble}
+\lstdefinestyle{bash}{
+    backgroundcolor=\color{DarkGrey},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{DarkGrey},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\tiny\color{LightGrey},
+    escapeinside={\%*}{*)},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    showlines=false,
+    tabsize=2
+}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,decorations.pathreplacing,arrows,arrows.meta,shapes,patterns, positioning}
+\newcommand\BigLength{14.6em}
+\newcommand\Height{2em}
+\newcommand\Sep{0.6em}
+\newcommand\Center{\BigLength*1/2}
+\newcommand\BigBox{\BigLength+\Sep}
+\newcommand\HalfBox{\BigLength*1/2-\Sep*1/4}
+\newcommand\HalfLength{\BigLength*1/2-\Sep*5/4}
+\newcommand\CenterL{\BigLength*1/4-\Sep*1/8}
+\newcommand\CenterR{\BigLength*3/4+\Sep*1/8}
+\tikzstyle{layer}=[rectangle,thick,text centered,
+                     minimum height=\Height,minimum width=\BigLength]
+\tikzstyle{short}=[rectangle,thick,text centered,
+                     minimum height=\Height,minimum width=\HalfLength]
+\tikzstyle{dibox}=[rectangle,thick,semitransparent,
+                     minimum height=(\Height+\Sep)*2,minimum width=\BigBox]
+\tikzstyle{vmbox}=[rectangle,thick,semitransparent,
+                     minimum height=(\Height+\Sep)*3,minimum width=\HalfBox]
+\tikzstyle{ctbox}=[rectangle,thick,semitransparent,
+                     minimum height=(\Height+\Sep)*2,minimum width=\HalfBox]
+\tikzstyle{vebox}=[rectangle,thick,semitransparent,
+                     minimum height=(\Height+\Sep)*1,minimum width=\HalfBox]
+
+\usepackage{hyperref}
+\usepackage{grffile}
