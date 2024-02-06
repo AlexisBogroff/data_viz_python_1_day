@@ -9,3 +9,6 @@ Its basics components are:
 - Dash: based on Plotly, provides interactivity with the user as in any dashboard (Tableau Software, Power BI, etc.)
 
 This course has been made originally for UPEC (Université Paris Est Créteil) located in France in the Paris area. It is expected to be taught in a 1 day workshop with 3 hours of lectures and 4 hours of exercises.
+
+Links:
+- [cours](src/cours.html)
