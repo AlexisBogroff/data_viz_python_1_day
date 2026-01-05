@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {}
   },
-  "postCreateCommand": "pip install -r requirements.txt",
+  "postCreateCommand": "pip install -r requirements.txt && sudo ln -sf /home/codespace/.local/lib/python3.12/site-packages/bin/streamlit /usr/local/bin/streamlit",
   "customizations": {
     "vscode": {
       "settings": {},
