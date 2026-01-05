@@ -1,17 +1,51 @@
-\begin{frame}\frametitle{Presenter}
-   \begin{minipage}{0.3\linewidth}
-      \centering
-      \includegraphics[width=0.6\textwidth]{images/AlexisBogroff.png} \\
-   \end{minipage}
-   \begin{minipage}{0.6\linewidth}
-      \noindent Alexis Bogroff \\
-      Enseignant data science \\
-      à Paris 1 Panthéon-Sorbonne, ESILV, Albert School, UPEC, EM-Lyon, Openclassrooms
-   \end{minipage}
-   \\[2ex]
-   \visible<2->{\begin{itemize}
-      \item 6 ans d'enseignement en Data Science et programmation
-      \item 2 ans en dev. d'automatisations et pipelines de données
-   \end{itemize}}
-   \hfill
+\begin{frame}
+   \frametitle{Qui suis-je ?}
+   
+   \begin{columns}
+       % --- Colonne Photo & Titre ---
+       \begin{column}{0.35\textwidth}
+           \centering
+           % Version simple pour l'image
+           \includegraphics[width=3cm]{images/AlexisBogroff.png}
+           
+           \vspace{0.5cm}
+           \textbf{\large Alexis Bogroff}\\
+           \textit{\small Data Scientist \& Enseignant}
+       \end{column}
+
+       % --- Colonne Expérience ---
+       \begin{column}{0.65\textwidth}
+           \textbf{Mon parcours en deux axes :}
+           
+           \vspace{0.4cm}
+           
+           % Partie Enseignement
+           \visible<1->{
+               % On utilise un rond bleu simple au lieu de l'icône
+               \textbf{\color{blue} $\bullet$ Enseignement (6+ ans)}
+               \footnotesize
+               \begin{itemize}
+                   \item \textbf{Intervenant Data Science :} Paris 1 Panthéon-Sorbonne, ESILV, Albert School, UPEC, EM-Lyon.
+                   \item \textbf{Mentor :} OpenClassrooms \& Managers entreprises du CAC40.
+               \end{itemize}
+           }
+           
+           \vspace{0.3cm}
+           
+           % Partie Pratique
+           \visible<2->{
+               % On utilise un rond rouge simple au lieu de l'icône
+               \textbf{\color{red} $\bullet$ R\&D et Développement (2+ ans)}
+               \footnotesize
+               \begin{itemize}
+                   \item \textbf{Entrepreneur :} Création de solutions techniques et R\&D pour start-up.
+                   \item \textbf{Expertise Technique :} Développement de pipelines de données \& Automatisations (Python).
+               \end{itemize}
+           }
+       \end{column}
+   \end{columns}
+   
+   \vfill
+   \centering
+   \scriptsize \href{https://www.linkedin.com/in/alexisbogroff/}{linkedin.com/in/alexisbogroff}
 \end{frame}

@@ -21,130 +21,93 @@
 \input{CM_introduction.tex}
 
 % =============================================================================
+\section{Introduction : La Viz à l'ère de l'IA}
 % =============================================================================
-\section{Introduction}
-% 3 Hours course
-% =============================================================================
-% =============================================================================
+
+%------------------------------------------------------------------------------
+% SLIDE 1 : Accroche
+%------------------------------------------------------------------------------
+\begin{frame}\frametitle{Pourquoi ce cours aujourd'hui ?}
+   \begin{itemize}
+      \item \textbf{Le constat :} Vos jeux de données sont de plus en plus complexes (Big Data, High-Dim). Excel ne suffit plus.
+      \item \textbf{L'enjeu académique :} Une visualisation médiocre peut tuer un papier excellent. Une visualisation interactive peut faire décoller une citation.
+      \item \textbf{La révolution 2026 :}
+      \begin{itemize}
+          \item Fini le temps perdu à "debugger" des axes matplotlib.
+          \item L'IA (LLM) génère le code, vous gérez la \textbf{logique visuelle}.
+          \item Passage du graphique statique (PDF) à l'application web (Streamlit).
+      \end{itemize}
+   \end{itemize}
+   % Idée image : Un graphique moche "Excel 97" vs un Dashboard moderne
+\end{frame}
+
+%------------------------------------------------------------------------------
+% SLIDE 2 : Objectifs Modernisés
+%------------------------------------------------------------------------------
+\begin{frame}\frametitle{Objectifs de la journée (Mode Accéléré)}
+   \begin{enumerate}
+      \item \textbf{Maîtriser la grammaire graphique :} Savoir \textit{quoi} demander à l'IA (Scatter ? Heatmap ? Violin ?).
+      \item \textbf{L'écosystème Python :} Comprendre qui fait quoi (Matplotlib vs Plotly vs Streamlit).
+      \item \textbf{Pratique "Vibe Coding" :} Générer des visualisations complexes sans être un expert Python.
+      \item \textbf{Sortir du Notebook :} Transformer vos analyses en outils interactifs partageables.
+   \end{enumerate}
+   \begin{center}
+       \textit{"Ne codez plus la syntaxe, architecturez la solution."}
+   \end{center}
+\end{frame}
+
+%------------------------------------------------------------------------------
+% SLIDE 3 : Redéfinir la Dataviz pour des experts
+%------------------------------------------------------------------------------
+\begin{frame}\frametitle{La Data Viz : Deux usages distincts}
+   \begin{columns}
+       \begin{column}{0.5\textwidth}
+           \textbf{1. Pour VOUS (Exploration)}
+           \begin{itemize}
+               \item Rapide, interactive, "sale".
+               \item Objectif : Comprendre les outliers, vérifier les hypothèses.
+               \item \textit{Outils : Pandas, Plotly express.}
+           \end{itemize}
+       \end{column}
+       \begin{column}{0.5\textwidth}
+           \textbf{2. Pour EUX (Communication)}
+           \begin{itemize}
+               \item Épurée, narrative, esthétique.
+               \item Objectif : Convaincre (Reviewers, Public, Décideurs).
+               \item \textit{Outils : Streamlit, Plotly.}
+           \end{itemize}
+       \end{column}
+   \end{columns}
+\end{frame}
+
+%------------------------------------------------------------------------------
+% SLIDE 4 : Pourquoi le code ? (Argument reproductibilité)
+%------------------------------------------------------------------------------
+\begin{frame}\frametitle{Pourquoi passer par le code (Python) ?}
+   Contrairement aux outils "Click-button" (Excel, Tableau...), le code assure la \textbf{Reproductibilité Scientifique}.
+
+   \begin{itemize}
+      \item \textbf{Traçabilité :} Chaque transformation de la donnée est écrite.
+      \item \textbf{Scalabilité :} Refaire le graphique avec 1 million de nouvelles lignes prend 1 seconde.
+      \item \textbf{Flexibilité :} On n'est pas limité par les menus du logiciel. Si on peut l'imaginer, on peut le coder (ou demander à l'IA de le faire).
+   \end{itemize}
+\end{frame}
 
 
 %------------------------------------------------------------------------------
-\subsection{Pourquoi ce cours}
+% SLIDE 5 : Le Futur
 %------------------------------------------------------------------------------
-\begin{frame}\frametitle{Pourquoi ce cours}
+\begin{frame}\frametitle{Vers le "Data Product"}
+   Aujourd'hui, nous allons dépasser le stade du fichier `.png` statique.
+
    \begin{itemize}
-      % \item TODO: find article about current enormous investments made to collect and work on data visualization
-      % \item TODO: find article about jobs using data
-      \item Vous travaillez déjà dans un environnement riche en données
-      \item Bénéficiez d'une montée en compétences en visualisation  \inlinegraphics{images/illustrations/up_arrow_green.png}
-      \item \href{https://www.forbes.fr/business/les-citizen-data-scientists-donner-des-competences-techniques-aux-experts-metier/}{Compétences complémentaires pour les experts métier}
+      \item \textbf{Avant :} Un rapport PDF figé.
+      \item \textbf{Demain (ce soir) :} Une URL publique vers un dashboard où vos lecteurs peuvent filtrer vos données eux-mêmes.
    \end{itemize}
-   \begin{figure}[H]
-      \includegraphics[width=10cm]{images/illustrations/viz_cheat_sheet.png}
-   \end{figure}
+
+   \begin{center}
+       \textbf{C'est parti !}
+   \end{center}
 \end{frame}
-
-\begin{frame}\frametitle{Pourquoi ce cours}
-   \begin{itemize}
-      \item Formation accélérée : 1 journée, 7h \inlinegraphics{images/illustrations/run.jpeg}
-      \item Objectifs
-      \begin{itemize}
-         \item Revoir et approfondir le choix du type de graphique
-         \item Découvrir de nouvelles visualisations
-         \item Découvrir comment les implémenter en python
-         \item Comprendre les liens entre les différentes librairies Python
-      \end{itemize}
-   \end{itemize}
-\end{frame}
-
-
-% Reformuler, redispatcher les points sur autres slides
-\begin{frame}\frametitle{Qu'est-ce que la \textit{data viz}}
-   \begin{itemize}
-      \item Représentation visuelle de la donnée, de l'information
-      \item Facilite la vue et la compréhension de tendances (trends), valeurs erronées (outliers), et relations (patterns)
-      \item Permet d'expliquer pourquoi ces relations existent, et ce qui pourrait advenir si ces relations persistent
-      
-      \item Utilise différents types de graphiques: graphiques à barres (bar charts), nuages de points (scatter plots), graphqiues linéaires (line charts), camemberts (pie charts), cartes (maps), etc.
-      
-      % Formes
-      \item Peut être static ou dynamique sur des données historiques, ou bien en temps réel sur un flux continu de nouvelles données
-      \item Peut être un graph seul, ou bien un tableau de bord (dashboard)
-      \item Peut être intéractif grâce à des systèmes de filtre
-      
-   \end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Qu'est-ce que la \textit{data viz}}
-   \begin{itemize}
-      \item Permet de représenter des petits volumes de données ou de très larges bases de données (Big Data) sur différents outils
-      \item Permet de vulgariser des concepts, et d'atteindre une audience non technique
-      \item Permet de prendre des décisions stratégiques
-      \item Permet de comprendre des informations utiles de manière intuitive provenant de jeux de données complexes
-
-      \item Des visualisations sont utilisées de manière courantes dans nos vies quotidiennes (charge d'une batterie de smartphone, compteurs de voiture, etc.)
-      \item Les bonnes visualisations sont le résultat d'une bonne communication, d'une bonne analyse, et d'un bon design.
-      
-   \end{itemize}
-\end{frame}
-
-% TODO add graphs to show
-\begin{frame}\frametitle{Dans quels domaines}
-   \begin{itemize}
-      \item Tous
-      \begin{itemize}
-         \item Marketing
-         \item Business
-         \item Finance
-         \item Industries
-         \item Santé
-         \item Education
-         \item etc.
-      \end{itemize}
-   \end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Avantages}
-   \begin{itemize}
-      \item Rend l'information compréhensible
-      \item Peut la rendre plus accessible
-      \item Permet une lecture plus rapide
-      \item Permet une compréhension plus intuitive
-      \item Peut être plus convainquant % (https://blog.reeport.io/fr/les-diagrammes-circulaires-ou-la-data-visualisation-pour-convaincre)
-      \item Aide à la prise de décision
-   \end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Risques}
-   \begin{itemize}
-      \item Biais cognitifs dues aux choix des types de graphs, d'échelles, de couleurs, etc.
-      \item L'information sous-jacente peut malgré tout être fausse
-      \item Corrélation n'est pas causalité
-   \end{itemize}
-\end{frame}
-
-
-
-\begin{frame}\frametitle{Dans quel cadre faire de la \textit{data visualization}}
-   \begin{itemize}
-         \item Compréhension personnelle lors d'une exploration de données
-         \item Rapports d'analyses (équipe, direction, clients)
-         \item Tableaux de bords (équipe, direction, clients)
-         \item Partout (cf. exemples de la vie courante)
-   \end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Qui peut utiliser les visualisations de données}
-   \begin{itemize}
-      \item Analystes de données
-      \item Experts métier
-      \item Managers, dirigeants
-      \item Développeurs
-      \item Chercheurs
-      \item Journalistes
-      \item Tout le monde
-   \end{itemize}
-\end{frame}
-
 
 \end{document}
