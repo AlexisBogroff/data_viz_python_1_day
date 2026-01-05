@@ -4,17 +4,13 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {}
   },
-  "containerEnv": {
-    "PATH": "${containerEnv:HOME}/.local/bin:${containerEnv:PATH}"
-  },
-  "postCreateCommand": "python3 -m pip install --upgrade --user -r requirements.txt",
-  "postStartCommand": "command -v streamlit || (echo 'streamlit not found; listing ~/.local/bin:' && ls -la ~/.local/bin || true)",
+  "postCreateCommand": "sudo pip install --no-cache-dir -r requirements.txt",
   "customizations": {
     "vscode": {
       "settings": {},
       "extensions": [
         "ms-python.python",
-        "tamasfe.even-better-toml" 
+        "tamasfe.even-better-toml"
       ]
     }
   },
