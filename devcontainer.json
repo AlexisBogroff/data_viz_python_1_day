@@ -7,7 +7,8 @@
   "containerEnv": {
     "PATH": "${containerEnv:HOME}/.local/bin:${containerEnv:PATH}"
   },
-  "postCreateCommand": "pip install -r requirements.txt",
+  "postCreateCommand": "python3 -m pip install --upgrade --user -r requirements.txt",
+  "postStartCommand": "command -v streamlit || (echo 'streamlit not found; listing ~/.local/bin:' && ls -la ~/.local/bin || true)",
   "customizations": {
     "vscode": {
       "settings": {},
