@@ -9,8 +9,6 @@ Its basics components are:
 - Plotly: based on Seaborn, provides interactivity with labels and zoom level, along with additional ready to use graphs (e.g. sunburst)
 - Streamlit: provides interactivity with the user as in any dashboard (Tableau Software, Power BI)
 
-Here is the formal, academic version of the `README.md` file in English. I have removed all emojis and adopted a professional tone suitable for a research environment.
-
 ## Instruction for Streamlit Workshop
 
 The objective of this workshop is to transition from static data analysis to interactive web applications, ensuring reproducibility and ease of sharing within the scientific community.
