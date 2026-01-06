@@ -89,3 +89,5 @@ To make your dashboard accessible to collaborators via a public URL, we will dep
 
 This course has been made originally for UPEC (Université Paris Est Créteil) located in France in the Paris area. It is expected to be taught in a 1 day workshop with 3 hours of lectures and 4 hours of exercises.
 
+
+Coucou (alexis)
