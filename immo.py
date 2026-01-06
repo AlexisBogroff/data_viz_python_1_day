@@ -52,9 +52,12 @@ def download_and_load(url: str) -> pd.DataFrame:
                         return df
                 except Exception:
                     continue
-    # last resort try pandas automatic
-    df = pd.read_csv(io.StringIO(raw.decode("latin-1")), sep=None, engine="python", low_memory=False)
-    return df
+    # last resort try pandas automatic (automatic separator detection requires python engine)
+    try:
+        df = pd.read_csv(io.StringIO(raw.decode("latin-1")), sep=None, engine="python")
+        return df
+    except Exception as e:
+        raise RuntimeError(f"Could not parse file with automatic separator detection: {e}")
 
 
 def standardize_columns(df: pd.DataFrame) -> pd.DataFrame:
