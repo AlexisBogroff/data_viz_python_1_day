@@ -179,25 +179,78 @@ def main():
     st.subheader("Carte des transactions")
 
     # prepare columns for pydeck
-    df_map = df_filtered[["longitude", "latitude", "valeur_fonciere", "date_mutation"].copy()]
-    df_map = df_map.rename(columns={"valeur_fonciere": "price", "date_mutation": "date"}).dropna()
-    df_map["radius"] = (df_map["price"] / df_map["price"].median()).clip(0.1, 10) * 50
+    # If we don't have coordinates, try to geocode addresses (BAN API) for the filtered set
+    if not ("longitude" in df_filtered.columns and "latitude" in df_filtered.columns and df_filtered["longitude"].notna().any() and df_filtered["latitude"].notna().any()):
+        st.info("Coordonnées manquantes — géocodage des adresses via api-adresse.data.gouv.fr (limité et mis en cache)")
 
-    layer = pdk.Layer(
-        "ScatterplotLayer",
-        data=df_map,
-        pickable=True,
-        get_position="[longitude, latitude]",
-        get_radius="radius",
-        get_fill_color="[255 * (price - @min_price) / (@max_price - @min_price + 1), 100, 140]",
-        tooltip=True,
-    )
+        # build an address field from available columns
+        def build_addr(row):
+            no = str(row.get("no_voie", "")).strip()
+            typ = str(row.get("type_de_voie", "")).strip()
+            voie = str(row.get("voie", "")).strip()
+            commune = str(row.get("commune", "")).strip()
+            cp = str(row.get("code_postal", "")).strip()
+            parts = [p for p in [no, typ, voie] if p]
+            addr = " ".join(parts)
+            if cp or commune:
+                addr = f"{addr}, {cp} {commune}" if addr else f"{cp} {commune}"
+            return addr
 
-    view_state = pdk.ViewState(latitude=midpoint[0], longitude=midpoint[1], zoom=13)
+        df_filtered["_addr_search"] = df_filtered.apply(build_addr, axis=1)
+        unique_addrs = df_filtered["_addr_search"].dropna().astype(str).unique().tolist()
+        max_geocode = 500
+        if len(unique_addrs) > max_geocode:
+            st.warning(f"Trop d'adresses uniques ({len(unique_addrs)}). Géocodage limité aux {max_geocode} premières adresses.")
+            unique_addrs = unique_addrs[:max_geocode]
 
-    r = pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip={"html": "<b>Prix:</b> {price} €<br><b>Date:</b> {date}", "style": {"backgroundColor": "white"}})
+        @st.cache_data
+        def geocode_batch(addrs):
+            out = {}
+            for a in addrs:
+                if not a.strip():
+                    out[a] = (None, None)
+                    continue
+                try:
+                    r = requests.get("https://api-adresse.data.gouv.fr/search/", params={"q": a, "limit": 1}, timeout=10)
+                    r.raise_for_status()
+                    j = r.json()
+                    feat = j.get("features")
+                    if feat:
+                        lon, lat = feat[0]["geometry"]["coordinates"]
+                        out[a] = (lon, lat)
+                    else:
+                        out[a] = (None, None)
+                except Exception:
+                    out[a] = (None, None)
+            return out
 
-    st.pydeck_chart(r)
+        geocoded = geocode_batch(unique_addrs)
+        df_filtered["longitude"] = df_filtered["_addr_search"].map(lambda a: geocoded.get(a, (None, None))[0])
+        df_filtered["latitude"] = df_filtered["_addr_search"].map(lambda a: geocoded.get(a, (None, None))[1])
+
+    # prepare the dataframe for mapping
+    df_map = df_filtered[["longitude", "latitude", "valeur_fonciere", "date_mutation"]].copy()
+    df_map = df_map.rename(columns={"valeur_fonciere": "price", "date_mutation": "date"}).dropna(subset=["longitude", "latitude", "price"])
+    if df_map.empty:
+        st.warning("Aucune coordonnée disponible pour afficher la carte après géocodage.")
+    else:
+        df_map["radius"] = (df_map["price"] / df_map["price"].median()).clip(0.1, 10) * 50
+
+        layer = pdk.Layer(
+            "ScatterplotLayer",
+            data=df_map,
+            pickable=True,
+            get_position="[longitude, latitude]",
+            get_radius="radius",
+            get_fill_color="[255 * (price - @min_price) / (@max_price - @min_price + 1), 100, 140]",
+            tooltip=True,
+        )
+
+        view_state = pdk.ViewState(latitude=midpoint[0] if not pd.isna(midpoint[0]) else df_map["latitude"].mean(), longitude=midpoint[1] if not pd.isna(midpoint[1]) else df_map["longitude"].mean(), zoom=13)
+
+        r = pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip={"html": "<b>Prix:</b> {price} €<br><b>Date:</b> {date}", "style": {"backgroundColor": "white"}})
+
+        st.pydeck_chart(r)
 
     st.subheader("Détail des transactions")
     st.dataframe(df_filtered[["date_mutation", "valeur_fonciere", "adresse_nom_voie", "code_postal", "libelle_commune", "longitude", "latitude"]].rename(columns={"date_mutation": "date", "valeur_fonciere": "prix"}))
